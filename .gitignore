@@ -1,0 +1,29 @@
+# Dataset folders and raw data files
+Assignment-1/dataset/
+Assignment-1/dataset_split/
+Assignment-2/dataset.csv
+Assignment-3/iris_data/
+Assignment-4/DermMel/
+
+# Common dataset archive formats
+*.zip
+*.rar
+*.7z
+*.tar
+*.tar.gz
+
+# Python cache and local runtime files
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environments and local configuration
+.venv/
+venv/
+env/
+.env
+
+# Generated training artifacts
+*.pkl
+*.h5
+*.keras
