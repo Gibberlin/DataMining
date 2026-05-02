@@ -1,116 +1,81 @@
-# Assignment 2 — Spam Detection (Naive Bayes)
+# Assignment 2: Spam Detection with Naive Bayes
 
-## Objective
-Build a **Spam Classifier** using the **Naive Bayes algorithm** *without using any machine learning libraries*.
+<p>
+  <img src="https://img.shields.io/badge/Algorithm-Naive%20Bayes-9B51E0" alt="Naive Bayes">
+  <img src="https://img.shields.io/badge/Language-Python-2D9CDB" alt="Python">
+  <img src="https://img.shields.io/badge/Libraries-No%20ML%20Library-27AE60" alt="No ML Library">
+</p>
 
----
+## Project Snapshot
 
-## Dataset
+This project classifies a text message as **SPAM** or **NOT SPAM** using Naive Bayes probability logic written from scratch.
 
-**File:** `dataset.csv`
+| Item | Details |
+| --- | --- |
+| Main file | `naive_bayes_spam.py` |
+| Dataset location | `../Datasets/Assignment-2/dataset.csv` |
+| Input | User-entered message |
+| Output | Spam probability, not-spam probability, final class |
 
-### Dataset Credit
-The dataset used in this assignment was provided by **Syed Akhter Hussain**.
+## Prerequisites
 
-### Format:
-| word  | not_spam | spam |
-|------|----------|------|
-| hello | 10       | 2    |
-| offer | 1        | 15   |
+Python 3.10+ is enough. This assignment uses only built-in Python modules.
 
----
-
-## Implementation Logic
-
-### Load Dataset
-- Read CSV file using Python `csv` module  
-- Store word frequencies for both classes:
-  - Spam
-  - Not Spam  
-
----
-
-### Calculate Probabilities
-Compute prior probabilities:
-
-```
-P(Not Spam)
-P(Spam)
+```bash
+python --version
 ```
 
----
+## Dataset Setup
 
-### Classification Logic
+The CSV file is now stored in the shared dataset folder:
 
-Apply **Laplace Smoothing**:
-
-```
-P(word | class) = (count + 1) / (total_words + vocab_size)
+```text
+../Datasets/Assignment-2/dataset.csv
 ```
 
----
+Expected format:
 
-### Naive Bayes Formula
+| word | not_spam | spam |
+| --- | ---: | ---: |
+| hello | 10 | 2 |
+| offer | 1 | 15 |
 
-```
-P(C | X) = (P(X | C) * P(C)) / P(X)
-```
+## How to Run
 
-Where:
-- `C` = Class (Spam / Not Spam)
-- `X` = Input message
+From the repository root:
 
----
-
-### Prediction
-- Calculate probabilities for both classes  
-- Compare results  
-- Output classification:
-
-```
-SPAM
-or
-NOT SPAM
+```bash
+python Assignment-2/naive_bayes_spam.py
 ```
 
+Or from inside `Assignment-2`:
 
-## Sample Output
+```bash
+python naive_bayes_spam.py
+```
 
+## How to Use
+
+When prompted, type a message:
+
+```text
+Enter message: congratulations you won an offer
+```
+
+The script prints:
+
+```text
+Probability(Not Spam)
+Probability(Spam)
+The message is classified as: SPAM or NOT SPAM
+```
+
+## Output Preview
 
 ![Assignment 2 Output](../Images/assing2.png)
----
 
-## Features
+## Notes
 
-- No external machine learning libraries
-- Lightweight implementation
-- Beginner-friendly structure
-- Based on probability concepts
+<span style="color:#27AE60"><b>Good for:</b></span> understanding Bayes theorem, word frequencies, and Laplace smoothing.
 
----
-
-## Limitations
-
-- Assumes **word independence**
-- Accuracy depends on dataset quality
-- Not suitable for very large datasets
-
----
-
-## Future Improvements
-
-- Add text preprocessing (stopwords, stemming)
-- Use TF-IDF
-- Build web interface
-- Compare multiple algorithms
-
----
-
-## Author
-
-**Syed Yashin Hussain**  
-Roll Number: 24205007014  
-B.Tech CSE Student  
-Barak Valley Engineering College  
-
----
+<span style="color:#C0392B"><b>Limitation:</b></span> accuracy depends heavily on the quality and size of `dataset.csv`.

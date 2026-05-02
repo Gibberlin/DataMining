@@ -6,6 +6,7 @@ from tensorflow.keras.applications.mobilenet_v2 import preprocess_input
 
 IMG_SIZE = 224
 BASE_DIR = Path(__file__).resolve().parent
+ROOT_DIR = BASE_DIR.parent
 MODEL_PATH = BASE_DIR / "cancer_model.h5"
 CLASS_NAMES_PATH = BASE_DIR / "class_names.txt"
 
@@ -22,7 +23,7 @@ else:
 def predict_image(image_path):
     image_path = Path(image_path)
     if not image_path.is_absolute():
-        image_path = BASE_DIR / image_path
+        image_path = ROOT_DIR / image_path
     if not image_path.exists():
         raise FileNotFoundError(f"Image file not found: {image_path}")
 
@@ -47,5 +48,5 @@ def predict_image(image_path):
 
 
 if __name__ == "__main__":
-    image_path = "DermMel/test/NotMelanoma/ISIC_0024307.jpg"
+    image_path = "Datasets/Assignment-4/DermMel/test/NotMelanoma/ISIC_0024307.jpg"
     predict_image(image_path)

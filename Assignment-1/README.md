@@ -1,120 +1,87 @@
-<!-- A Data Mining assignment demonstrating data cleaning, exploratory analysis, and predictive modeling.
-# Assignment 1
-Question: Detect Digit without using Neural Networks
+# Assignment 1: Digit Detection without Neural Networks
 
-## Dataset Credit
-The dataset used in this assignment was provided by **Syed Akhter Hussain**.
+<p>
+  <img src="https://img.shields.io/badge/Algorithm-KNN-2F80ED" alt="KNN">
+  <img src="https://img.shields.io/badge/Task-Digit%20Classification-27AE60" alt="Digit Classification">
+  <img src="https://img.shields.io/badge/Notebook-Jupyter-F2994A" alt="Jupyter">
+</p>
 
-Implement:
-Step 1: Download dataset from kaggle
-Step 2: Split Dataset in Val,Test,Train with the Ratio of 10,10,80 by using split-folders package
-Step 3: Then train model in google colab 
-        Where used k neighbour technique 
-        In this technique used euclidean method 
-            a: Where set k value = 5
-            b: Where set x,y array for load image and folder eg:1-9
-            c: Then load then images folder in y and images in x 
-            d: Loaded images save as a array using numpy array
-            e: Then define knn using KNeighorsClassifier(which is an function provided by sklearn) with the parameter K which set previous(K means number of neighbors to be compare with) for classified images in classes.
-            f: Fit the images in training folder and images.
-                Fit means compare the images for training folder with there respective folder label eg: if one image is found in its respective folder name is 1 then its Class declare as 1.
-            g: compare every images and there folder label and save data and export as .pkl format
-Step 4: After import model implement it to predict
-Step 5: Calculate Validation and Test Accuracy by 
-        # TRUE POSITIVE + FALSE POSITIVE / TOTAL PREDICTION
-        a:  If system predict a image is 1 and its actually 1 then its TRUE POSITIVE 
-        b: If system predict a image is 1 and its actually not 1 then its FALSE POSITIVE
-        c: If system predict a image is not 1 and its actually 1 then its FALSE NEGATIVE
-        d: If system predict a image is not 1 and its actually not 1 then its TRUE NEGATIVE
-        e: And all TRUE POSITIVE + FALSE POSITIVE + FALSE NEGATIVE + TRUE NEGATIVE occure during prediction call as TOTAL PREDICTION
- -->
+## Project Snapshot
 
+This project classifies handwritten digit images from `0` to `9` using the **K-Nearest Neighbors (KNN)** algorithm. It does not use neural networks.
 
-
-# Data-Mining-Assignment-6th-Sem
-
-A Data Mining assignment demonstrating data cleaning, exploratory analysis, and predictive modeling.
-
-## Student Details
-
-| Field | Details |
-|-------|---------|
-| Name | Syed Yashin Hussain |
-| Roll Number | 24205007014 |
-| Course | B.Tech CSE |
-| College | Barak Valley Engineering College |
-
-
-# Assignment 1
-
-**Question:** Detect Digit without using Neural Networks
-
-## Dataset Credit
-The dataset used in this assignment was provided by **Syed Akhter Hussain**.
-
-## Implementation Steps
-
-### Step 1 — Download Dataset
-Download the dataset from Kaggle.
-
----
-
-### Step 2 — Split Dataset
-Split the dataset into **Val / Test / Train** with the ratio of **10 / 10 / 80** using the `split-folders` package.
-
----
-
-### Step 3 — Train Model (Google Colab)
-Train the model using the **K-Nearest Neighbors (KNN)** technique with the **Euclidean** distance method.
-
-| Parameter | Value |
-|-----------|-------|
-| K value | 5 |
+| Item | Details |
+| --- | --- |
+| Model | KNN |
 | Distance metric | Euclidean |
+| K value | 5 |
+| Dataset location | `../Datasets/Assignment-1/` |
+| Main file | `Assignment_1.ipynb` |
+| Saved model | `knn_model.pkl` |
 
-**How it works:**
+## Prerequisites
 
-- **a.** Set `K = 5` — this means the model compares each image to its 5 nearest neighbors
-- **b.** Define `x` and `y` arrays to hold images and their folder labels (e.g. folders 1–9)
-- **c.** Load images into `x` and their folder names into `y`
-- **d.** Save the loaded images as a **NumPy array**
-- **e.** Define KNN using `KNeighborsClassifier()` from `sklearn` — the `K` parameter sets how many neighbors to compare against for classifying an image
-- **f.** Fit the training images and labels
-  > *Fit means: compare every image with its folder label. For example, if an image is found in folder `1`, its class is declared as `1`*
-- **g.** Compare every image with its folder label, save the result, and export as **`.pkl`** format
+Install Python 3.10+ and Jupyter, then install the required packages:
 
----
-
-### Step 4 — Predict
-Import the saved `.pkl` model and use it to predict new images.
-
----
-
-### Step 5 — Calculate Validation and Test Accuracy
-
-**Formula:**
-```
-Accuracy = (TRUE POSITIVE + TRUE NEGATIVE) / TOTAL PREDICTIONS
+```bash
+pip install notebook numpy opencv-python scikit-learn split-folders kagglehub matplotlib
 ```
 
-| Term | Meaning |
-|------|---------|
-| **TRUE POSITIVE** | System predicts image is `1`, and it actually is `1`. |
-| **FALSE POSITIVE** | System predicts image is `1`, but it actually is not `1`. |
-| **FALSE NEGATIVE** | System predicts image is not `1`, but it actually is `1`. |
-| **TRUE NEGATIVE** | System predicts image is not `1`, and it actually is not `1`. |
+## Dataset Setup
 
- **TOTAL PREDICTIONS** = TRUE POSITIVE + FALSE POSITIVE + FALSE NEGATIVE + TRUE NEGATIVE  
- (all outcomes that occur during prediction)
+The dataset is stored outside this assignment folder to keep the project arranged:
 
- ![Assignment 1 Output](../Images/assing1.png)
+```text
+../Datasets/Assignment-1/
+├── dataset/
+│   ├── 0/
+│   ├── 1/
+│   └── ...
+└── dataset_split/
+    ├── train/
+    ├── val/
+    └── test/
+```
 
+The notebook is already updated to use these paths. If you download the dataset again, save it to:
 
-##  Author
+```text
+../Datasets/Assignment-1/dataset
+```
 
-**Syed Yashin Hussain**  
-Roll Number: 24205007014  
-B.Tech CSE Student  
-Barak Valley Engineering College  
+## How to Run
 
----
+From this folder:
+
+```bash
+jupyter notebook Assignment_1.ipynb
+```
+
+Run the notebook cells in order:
+
+1. Download or load the digit dataset.
+2. Split the dataset into train, validation, and test folders.
+3. Convert images into feature arrays.
+4. Train the KNN model.
+5. Save the trained model as `knn_model.pkl`.
+6. Run prediction on a test image.
+
+## How to Use
+
+Use this prediction format inside the notebook:
+
+```python
+predict("../Datasets/Assignment-1/dataset_split/test/2/digit_2_105.png")
+```
+
+Replace the path with any image from the test split.
+
+## Output Preview
+
+![Assignment 1 Output](../Images/assing1.png)
+
+## Notes
+
+<span style="color:#27AE60"><b>Good for:</b></span> learning image classification fundamentals without neural networks.
+
+<span style="color:#C0392B"><b>Limitation:</b></span> KNN can become slow when the image dataset grows large because it compares against stored samples.

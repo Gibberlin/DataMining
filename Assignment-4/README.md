@@ -1,164 +1,94 @@
-# Assignment 4 — Skin Cancer Detection (CNN - MobileNetV2)
+# Assignment 4: Skin Cancer Detection with MobileNetV2
 
-## Objective
-Build a deep learning model to classify skin lesion images into the following two categories:
+<p>
+  <img src="https://img.shields.io/badge/Model-MobileNetV2-EB5757" alt="MobileNetV2">
+  <img src="https://img.shields.io/badge/Task-Binary%20Image%20Classification-27AE60" alt="Binary Classification">
+  <img src="https://img.shields.io/badge/Framework-TensorFlow-F2994A" alt="TensorFlow">
+</p>
 
-- **Melanoma (Cancer)**
-- **Not Melanoma (Non-Cancer)**
+## Project Snapshot
 
-The project uses **Transfer Learning with MobileNetV2** to improve classification accuracy and training efficiency.
+This project classifies skin images as **Melanoma** or **NotMelanoma** using transfer learning with MobileNetV2.
 
-## Dataset
-The dataset is organized into separate folders for training, validation, and testing.
+| Item | Details |
+| --- | --- |
+| Training file | `train_model.py` |
+| Prediction file | `predict.py` |
+| Dataset location | `../Datasets/Assignment-4/DermMel/` |
+| Final model | `cancer_model.h5` |
+| Best checkpoint | `best_model.h5` |
+| Class names | `class_names.txt` |
+| Confusion matrix | `confusion_matrix.png` |
 
-### Dataset Credit
-The dataset used in this assignment was provided by **Syed Akhter Hussain**.
+## Prerequisites
+
+Install Python 3.10+ and the required packages:
+
+```bash
+pip install tensorflow numpy pillow matplotlib seaborn scikit-learn
+```
+
+TensorFlow can be heavy. If installation fails, use a Python version supported by your TensorFlow release.
+
+## Dataset Setup
+
+The dataset is stored in the shared dataset folder:
 
 ```text
-DermMel/
+../Datasets/Assignment-4/DermMel/
 ├── train_sep/
 │   ├── Melanoma/
 │   └── NotMelanoma/
 ├── valid/
+│   ├── Melanoma/
+│   └── NotMelanoma/
 └── test/
+    ├── Melanoma/
+    └── NotMelanoma/
 ```
 
-### Dataset Notes
-- Images are loaded using `flow_from_directory()`.
-- Class labels are automatically assigned from folder names.
-- Preprocessing is applied using `preprocess_input` from MobileNetV2.
+The scripts are already updated to read from this location.
 
-## Implementation Logic
+## How to Train
 
-### Load Dataset
-The dataset is loaded using `ImageDataGenerator`, which handles image loading, preprocessing, and augmentation.
+From the repository root:
 
-### Data Augmentation
-The following augmentation techniques are applied to training images:
-- Rotation
-- Zoom
-- Horizontal flip
+```bash
+python Assignment-4/train_model.py
+```
 
-These transformations help improve model generalization and reduce overfitting.
+The training workflow:
 
-### Class Weights
-To handle class imbalance, class weights are calculated using:
+1. Loads images with `ImageDataGenerator`.
+2. Applies preprocessing and augmentation.
+3. Trains MobileNetV2 transfer-learning layers.
+4. Fine-tunes the last 30 base-model layers.
+5. Saves the trained models and confusion matrix.
+
+## How to Predict
+
+Make sure `cancer_model.h5` exists, then run:
+
+```bash
+python Assignment-4/predict.py
+```
+
+To test a different image, edit the path at the bottom of `predict.py`:
 
 ```python
-compute_class_weight()
+image_path = "Datasets/Assignment-4/DermMel/test/NotMelanoma/ISIC_0024307.jpg"
 ```
 
-This ensures that minority classes receive appropriate importance during training.
-
-## Model Architecture
-The model is built using **MobileNetV2** pretrained on ImageNet as the base model.
-
-### Base Model
-- **MobileNetV2** (pretrained on ImageNet)
-
-### Custom Layers
-- GlobalAveragePooling2D
-- Dense layer with 128 units and ReLU activation
-- BatchNormalization
-- Dropout with rate 0.4
-- Output layer with Softmax activation for 2 classes
-
-## Training Strategy
-
-### Stage 1 — Transfer Learning
-- Freeze all layers of the base MobileNetV2 model
-- Train only the custom classification head
-
-### Stage 2 — Fine Tuning
-- Unfreeze the last 30 layers of the base model
-- Reduce the learning rate
-- Continue training to improve feature adaptation and performance
-
-## Callbacks
-The following callbacks are used during training:
-
-- `EarlyStopping` — Stops training when validation performance stops improving
-- `ReduceLROnPlateau` — Reduces learning rate when progress stalls
-- `ModelCheckpoint` — Saves the best model during training
-
-## Model Saving
-The trained models are saved as:
-
-- `cancer_model.h5` — Final trained model
-- `best_model.h5` — Best-performing model based on validation results
-
-## Evaluation
-The model is evaluated using the following metrics:
-
-- Confusion Matrix
-- Classification Report
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-
-### Accuracy Formula
-$$
-\text{Accuracy} = \frac{\text{True Positive} + \text{True Negative}}{\text{Total Predictions}}
-$$
-
-## Prediction Script (`Predict.py`)
-
-### Input
-Example input image path:
-
-```text
-DermMel/test/Melanoma/AUG_0_11.jpeg
-```
-
-### Prediction Logic
-The prediction script performs the following steps:
-
-1. Loads the trained model from `cancer_model.h5`
-2. Resizes the image to `224 x 224`
-3. Applies MobileNetV2 preprocessing
-4. Predicts the class label
-5. Displays the confidence score
-
-### Sample Output
-```text
-Prediction: Melanoma
-Confidence: 97.45%
-```
-
-## Sample Output Images
+## Output Preview
 
 ![Assignment 4 Output 1](../Images/assing4_output1.png)
 
 ![Assignment 4 Output 2](../Images/assing4_output2.png)
 
-
-## Confusion Matrix
 ![Assignment 4 Confusion Matrix](../Images/assing4_confusion_matrix.png)
 
-## Features
-- Deep learning model using CNN
-- Transfer learning with MobileNetV2
-- Data augmentation support
-- Class imbalance handling
-- Model saving and loading
-- Image-based prediction system
+## Notes
 
-## Limitations
-- Requires good dataset quality
-- Needs GPU for faster training
-- May overfit on small datasets
-- Performance depends on class balance and dataset diversity
+<span style="color:#27AE60"><b>Good for:</b></span> transfer learning, image augmentation, and model evaluation.
 
-## Future Improvements
-- Add Grad-CAM visualization for explainability
-- Use larger and more diverse datasets
-- Build a web interface for prediction
-- Try advanced architectures such as EfficientNet
-
-## Author
-**Syed Yashin Hussain**  
-Roll Number: 24205007014  
-B.Tech CSE Student  
-Barak Valley Engineering College
-
+<span style="color:#C0392B"><b>Limitation:</b></span> medical image classifiers require careful validation and should not be used as a real diagnosis tool.

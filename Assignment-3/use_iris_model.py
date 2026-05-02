@@ -5,9 +5,10 @@ from pathlib import Path
 from sklearn.datasets import load_iris
 
 BASE_DIR = Path(__file__).resolve().parent
+ROOT_DIR = BASE_DIR.parent
 MODEL_PATH = BASE_DIR / 'iris_knn_model.pkl'
 SCALER_PATH = BASE_DIR / 'iris_scaler.pkl'
-DATA_PATH = BASE_DIR / 'iris_data' / 'iris.csv'
+DATA_PATH = ROOT_DIR / 'Datasets' / 'Assignment-3' / 'iris_data' / 'iris.csv'
 PREDICTIONS_PATH = BASE_DIR / 'iris_predictions.csv'
 
 # Load the trained model and scaler

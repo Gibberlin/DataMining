@@ -18,7 +18,8 @@ EPOCHS_STAGE1 = 10
 EPOCHS_STAGE2 = 20
 
 BASE_DIR = Path(__file__).resolve().parent
-DATASET_DIR = BASE_DIR / "DermMel"
+ROOT_DIR = BASE_DIR.parent
+DATASET_DIR = ROOT_DIR / "Datasets" / "Assignment-4" / "DermMel"
 train_dir = DATASET_DIR / "train_sep"
 val_dir = DATASET_DIR / "valid"
 test_dir = DATASET_DIR / "test"

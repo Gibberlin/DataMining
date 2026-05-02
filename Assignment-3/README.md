@@ -1,153 +1,92 @@
-# Assignment 3 — Iris Classification (KNN)
+# Assignment 3: Iris Classification with KNN
 
-## Objective
-Build a Machine Learning model to classify Iris flower species using the K-Nearest Neighbors (KNN) algorithm and use the trained model for prediction.
+<p>
+  <img src="https://img.shields.io/badge/Algorithm-KNN-2F80ED" alt="KNN">
+  <img src="https://img.shields.io/badge/Dataset-Iris-27AE60" alt="Iris Dataset">
+  <img src="https://img.shields.io/badge/Tools-scikit--learn-F2994A" alt="scikit-learn">
+</p>
 
-## Dataset
-**Dataset Used:** Iris Dataset from `sklearn.datasets`
+## Project Snapshot
 
-### Dataset Credit
-The dataset used in this assignment was provided by **Syed Akhter Hussain**.
+This project trains a KNN model to classify Iris flowers into **Setosa**, **Versicolor**, or **Virginica**.
 
-### Features
-- Sepal Length
-- Sepal Width
-- Petal Length
-- Petal Width
+| Item | Details |
+| --- | --- |
+| Training file | `iris_model_training.py` |
+| Usage file | `use_iris_model.py` |
+| Batch CSV | `../Datasets/Assignment-3/iris_data/iris.csv` |
+| Model output | `iris_knn_model.pkl` |
+| Scaler output | `iris_scaler.pkl` |
+| Prediction output | `iris_predictions.csv` |
 
-### Target Classes
-| Class ID | Species |
-|---------|---------|
-| 0 | Setosa |
-| 1 | Versicolor |
-| 2 | Virginica |
+## Prerequisites
 
-## Implementation Overview
+Install Python 3.10+ and the required packages:
 
-### Part 1 — Model Training (`iris_model_training.py`)
+```bash
+pip install numpy pandas scikit-learn matplotlib seaborn
+```
 
-#### Step 1 — Load Dataset
-Load the Iris dataset using `load_iris()` and extract:
-- `X` → Features
-- `y` → Labels
+## Dataset Setup
 
-#### Step 2 — Split Dataset
-Split the dataset into the following ratios:
+Training uses the built-in Iris dataset from `sklearn.datasets`. Batch prediction uses the CSV stored here:
 
-| Set | Ratio |
-|-----|-------|
-| Training | 70% |
-| Validation | 15% |
-| Test | 15% |
+```text
+../Datasets/Assignment-3/iris_data/iris.csv
+```
 
-#### Step 3 — Feature Scaling
-Use `StandardScaler` to normalize the data for better KNN performance.
+Expected feature columns:
 
-#### Step 4 — Train Model
-Train the model using the K-Nearest Neighbors (KNN) algorithm with the following parameters:
+| Feature |
+| --- |
+| `SepalLengthCm` |
+| `SepalWidthCm` |
+| `PetalLengthCm` |
+| `PetalWidthCm` |
+| `Species` |
 
-| Parameter | Value |
-|----------|-------|
-| K | 5 |
-| Distance Metric | Euclidean |
-| Weights | Uniform |
+## How to Train
 
-#### Step 5 — Predictions
-Make predictions on:
-- Training set
-- Validation set
-- Test set
+From the repository root:
 
-#### Step 6 — Performance Evaluation
-Evaluate the model using the following metrics:
-- Accuracy
-- Precision
-- Recall
-- F1 Score
-- Confusion Matrix
-- Classification Report
+```bash
+python Assignment-3/iris_model_training.py
+```
 
-**Accuracy Formula:**
+This creates or updates:
 
-$$
-\text{Accuracy} = \frac{\text{True Positive} + \text{True Negative}}{\text{Total Predictions}}
-$$
+```text
+Assignment-3/iris_knn_model.pkl
+Assignment-3/iris_scaler.pkl
+Assignment-3/iris_model_performance.png
+```
 
-#### Step 7 — Save Model
-Save the trained artifacts as:
-- `iris_knn_model.pkl`
-- `iris_scaler.pkl`
+## How to Use
 
-#### Step 8 — Visualization
-Create the following visualizations:
-- Confusion Matrix (Heatmap)
-- Accuracy Comparison (Train vs Validation vs Test)
+After training, run:
 
-Save the output figure as:
-- `iris_model_performance.png`
+```bash
+python Assignment-3/use_iris_model.py
+```
 
-#### Step 9 — Example Prediction
-Test the model with sample inputs:
-- `[5.0, 3.5, 1.3, 0.3]` → **Setosa**
-- `[6.5, 3.0, 5.5, 1.8]` → **Virginica**
+The script demonstrates three usage modes:
 
-### Part 2 — Model Usage (`use_iris_model.py`)
+1. Predict predefined sample flowers.
+2. Predict a batch from `iris.csv`.
+3. Enter your own measurements interactively.
 
-#### Step 1 — Load Model
-Load the following saved files:
-- `iris_knn_model.pkl`
-- `iris_scaler.pkl`
+Manual input format:
 
-#### Step 2 — Prediction Methods
+```text
+5.0, 3.5, 1.3, 0.3
+```
 
-##### Method 1 — Individual Prediction
-Predict a single flower using:
-- **Input:** `[Sepal Length, Sepal Width, Petal Length, Petal Width]`
-- **Output:** Predicted species and confidence
-
-##### Method 2 — Batch Prediction (CSV)
-Load data from:
-- `iris_data/iris.csv`
-
-Predict all rows and save the results as:
-- `iris_predictions.csv`
-
-##### Method 3 — Interactive Prediction
-Allow manual user input such as:
-- `5.1,3.5,1.4,0.2`
-
-Output:
-- Predicted species
-- Probability distribution
-
-
-##  Sample Output
-
+## Output Preview
 
 ![Assignment 3 Output](../Images/assing3.png)
----
 
-## Features
-- Uses real dataset
-- End-to-end machine learning pipeline
-- Model saving and loading
-- Visualization included
-- Multiple prediction methods
-- Beginner-friendly
+## Notes
 
-## Limitations
-- Sensitive to feature scaling
-- KNN is slower for large datasets
-- Performance depends on the value of `K`
+<span style="color:#27AE60"><b>Good for:</b></span> learning train-validation-test splits, feature scaling, and classification metrics.
 
-## Future Improvements
-- Hyperparameter tuning for K optimization
-- Use cross-validation
-- Try other models such as SVM and Random Forest
-- Build a web interface using Flask or React
-
-## Author
-**Syed Yashin Hussain**  
-Roll Number: 24205007014  
-B.Tech CSE Student  
-Barak Valley Engineering College
+<span style="color:#C0392B"><b>Limitation:</b></span> KNN is simple and effective here, but it may slow down on much larger datasets.

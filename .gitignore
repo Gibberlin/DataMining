@@ -1,9 +1,9 @@
 # Dataset folders and raw data files
-Assignment-1/dataset/
-Assignment-1/dataset_split/
-Assignment-2/dataset.csv
-Assignment-3/iris_data/
-Assignment-4/DermMel/
+Datasets/Assignment-1/dataset/
+Datasets/Assignment-1/dataset_split/
+Datasets/Assignment-2/dataset.csv
+Datasets/Assignment-3/iris_data/
+Datasets/Assignment-4/DermMel/
 
 # Common dataset archive formats
 *.zip

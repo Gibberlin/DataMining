@@ -2,7 +2,8 @@ import csv
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent
-DATASET_PATH = BASE_DIR / "dataset.csv"
+ROOT_DIR = BASE_DIR.parent
+DATASET_PATH = ROOT_DIR / "Datasets" / "Assignment-2" / "dataset.csv"
 
 data={}
 total_not_spam=0
